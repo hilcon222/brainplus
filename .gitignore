@@ -1,0 +1,7 @@
+dist/
+*.pyc
+__pycache__
+*.whl
+*.tar.gz
+
+dist/brainplus-0.0.dev0.tar.gz
