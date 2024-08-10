@@ -11,3 +11,6 @@ dynamic = ["version", "description"]
 
 [project.urls]
 Home = "https://github.com/hilcon222/brainplus"
+
+[project.scripts]
+brainplus = "brainplus.brainplus:main"
