@@ -1,5 +1,0 @@
-dist/
-*.pyc
-__pycache__
-*.whl
-*.tar.gz
