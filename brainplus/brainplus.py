@@ -7,6 +7,7 @@ C_INTRO = """
 int main(void) {
 long memory[30000];
 long *p = memory;
+int *temp;
 
 """
 
@@ -42,4 +43,12 @@ def main(argv=None):
                     fout.write("putchar(*p);\n")
                 case ";":
                     fout.write("*p = getchar();\n")
+                case "&":
+                    fout.write("temp = &memory[(*p)+1]; p = temp;")
+                case "a":
+                    fout.write("*p += *(p+1);")
+                case "s":
+                    fout.write("*p -= *(p+1);")
+                case "m":
+                    fout.write("*p *= *(p+1);")
         fout.write("\n}\n")
