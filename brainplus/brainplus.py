@@ -41,7 +41,7 @@ def main(argv=None):
                     fout.write("(*p)--;\n")
                 case ".":
                     fout.write("putchar(*p);\n")
-                case ";":
+                case ",":
                     fout.write("*p = getchar();\n")
                 case "&":
                     fout.write("temp = &memory[(*p)+1]; p = temp;")
@@ -51,4 +51,8 @@ def main(argv=None):
                     fout.write("*p -= *(p+1);")
                 case "m":
                     fout.write("*p *= *(p+1);")
+                case ";":
+                    fout.write('scanf("%ld\\n", p);')
+                case ":":
+                    fout.write('printf("%ld", (*p));')
         fout.write("\n}\n")
