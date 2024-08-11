@@ -4,3 +4,4 @@ __pycache__
 *.whl
 *.tar.gz
 brainplus/test.c
+brainplus/test

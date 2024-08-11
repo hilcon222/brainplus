@@ -1,3 +1,3 @@
 "A compiler for Brainfuck+ esotheric language."
 
-__version__ = "0.0.dev3"
+__version__ = "1.0"

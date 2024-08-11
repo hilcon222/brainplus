@@ -17,6 +17,25 @@ def cname(s):
     return s.split('.')[0] + ".c"
 
 
+def parse_brackets(s):
+    "Matches the brackets"
+    stack = []
+    bracket_pairs = {}
+
+    for i, char in enumerate(s):
+        if char == '[':
+            stack.append(i)
+        elif char == ']':
+            if stack:
+                open_index = stack.pop()
+                bracket_pairs[open_index] = i
+            else:
+                raise ValueError(f"Unmatched closing bracket at index {i}")
+    if stack:
+        raise ValueError(f"Unmatched opening bracket at index {stack.pop()}")
+    return bracket_pairs
+
+
 def main(argv=None):
     "Main function"
     source = ''
@@ -27,9 +46,11 @@ def main(argv=None):
         sys.exit(1)
     with open(argv[1], "r", encoding="utf-8") as fin:
         source = fin.read()
+    brackets = parse_brackets(source)
+    c_brackets = {v: k for k, v in brackets.items()}
     with open(cname(argv[1]), "w", encoding="utf-8") as fout:
         fout.write(C_INTRO)
-        for char in source:
+        for i, char in enumerate(source):
             match char:
                 case "<":
                     fout.write("p--;\n")
@@ -55,4 +76,10 @@ def main(argv=None):
                     fout.write('scanf("%ld", p);\n')
                 case ":":
                     fout.write('printf("%ld", (*p));\n')
+                case "[":
+                    fout.write("l" + str(i) + ':' + "\n")
+                    fout.write('if (*p == 0) goto l' + str(brackets[i]) + ';\n') # noqa
+                case ']':
+                    fout.write("l" + str(i) + ':' + "\n")
+                    fout.write('if (!(*p == 0)) goto l' + str(c_brackets[i]) + ';\n') # noqa
         fout.write("\n}\n")
