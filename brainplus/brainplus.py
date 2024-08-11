@@ -44,15 +44,15 @@ def main(argv=None):
                 case ",":
                     fout.write("*p = getchar();\n")
                 case "&":
-                    fout.write("temp = &memory[(*p)+1]; p = temp;")
+                    fout.write("temp = &memory[(*p)+1]; p = temp;\n")
                 case "a":
-                    fout.write("*p += *(p+1);")
+                    fout.write("*p += *(p+1);\n")
                 case "s":
-                    fout.write("*p -= *(p+1);")
+                    fout.write("*p -= *(p+1);\n")
                 case "m":
-                    fout.write("*p *= *(p+1);")
+                    fout.write("*p *= *(p+1);\n")
                 case ";":
-                    fout.write('scanf("%ld\\n", p);')
+                    fout.write('scanf("%ld", p);\n')
                 case ":":
-                    fout.write('printf("%ld", (*p));')
+                    fout.write('printf("%ld", (*p));\n')
         fout.write("\n}\n")
